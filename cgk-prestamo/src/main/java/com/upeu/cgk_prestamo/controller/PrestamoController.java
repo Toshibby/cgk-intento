@@ -1,6 +1,6 @@
 package com.upeu.cgk_prestamo.controller;
 
-import com.upeu.cgk_prestamo.entity.Prestamo;
+import com.upeu.cgk_prestamo.dto.PrestamoDTO;
 import com.upeu.cgk_prestamo.service.PrestamoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +19,14 @@ public class PrestamoController {
 
     // Listar todos los préstamos
     @GetMapping
-    public ResponseEntity<List<Prestamo>> listarPrestamos() {
-        List<Prestamo> prestamos = prestamoService.listarPrestamos();
+    public ResponseEntity<List<PrestamoDTO>> listarPrestamos() {
+        List<PrestamoDTO> prestamos = prestamoService.listarPrestamos();
         return ResponseEntity.ok(prestamos);
     }
 
     // Obtener un préstamo por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Prestamo> obtenerPrestamo(@PathVariable Long id) {
+    public ResponseEntity<PrestamoDTO> obtenerPrestamo(@PathVariable Long id) {
         return prestamoService.obtenerPrestamoPorId(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -34,16 +34,16 @@ public class PrestamoController {
 
     // Crear un nuevo préstamo
     @PostMapping
-    public ResponseEntity<Prestamo> crearPrestamo(@RequestBody Prestamo prestamo) {
-        Prestamo guardado = prestamoService.guardarPrestamo(prestamo);
+    public ResponseEntity<PrestamoDTO> crearPrestamo(@RequestBody PrestamoDTO prestamoDTO) {
+        PrestamoDTO guardado = prestamoService.guardarPrestamo(prestamoDTO);
         return ResponseEntity.ok(guardado);
     }
 
     // Actualizar un préstamo
     @PutMapping("/{id}")
-    public ResponseEntity<Prestamo> actualizarPrestamo(@PathVariable Long id, @RequestBody Prestamo prestamo) {
+    public ResponseEntity<PrestamoDTO> actualizarPrestamo(@PathVariable Long id, @RequestBody PrestamoDTO prestamoDTO) {
         try {
-            Prestamo actualizado = prestamoService.actualizarPrestamo(id, prestamo);
+            PrestamoDTO actualizado = prestamoService.actualizarPrestamo(id, prestamoDTO);
             return ResponseEntity.ok(actualizado);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
