@@ -24,18 +24,18 @@ spring:
               enabled: true
               lower-case-service-id: true
           routes:
-            - id: ms-libro
-              uri: lb://ms-libro
+            - id: cgk-libro
+              uri: lb://cgk-libro
               predicates:
                 - Path=/libros/**
 
-            - id: ms-usuario
-              uri: lb://ms-usuario
+            - id: cgk-usuario
+              uri: lb://cgk-usuario
               predicates:
                 - Path=/usuarios/**
 
-            - id: ms-prestamo
-              uri: lb://ms-prestamo
+            - id: cgk-prestamo
+              uri: lb://cgk-prestamo
               predicates:
                 - Path=/prestamos/**
 
